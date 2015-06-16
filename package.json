@@ -23,8 +23,8 @@
   "dependencies" : {
     "webs-weeia": "0.0.2",
     "queuemanager": "^0.2.6",
-    "async": "^0.2.10",
-    "aws-sdk": "^2.1.20",
+    "async": "^0.7.0",
+    "aws-sdk": "^2.0.0-rc13",
     "ejs": "^1.0.0",
 	"moment": "^2.5.1"
   }
