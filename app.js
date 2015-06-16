@@ -6,7 +6,7 @@ var fs = require('fs');
 //obiekt do obsługi simple DB z aws-sdk
 //var simpledb = new AWS.SimpleDB();
 //GraphicsMagic
-//var gm = require('gm');
+var gm = require('gm');
 
 	var helpers = require("./helpers");
 	var Queue = require("queuemanager");
@@ -25,19 +25,34 @@ var fs = require('fs');
 	var queue = new Queue(new AWS.SQS(), appConfig.QueueUrl);
 	var sqsCommand = new SQSCommand(queue);
 	queue.receiveMessage(function(err, data){
-				if(err) { callback(err); return; }
-				console.log(data.Body)
+				if(err) { callback(err); return; console.log("Brak wiadomosci")}
+				console.log(data.Body) // wyswietla wiadomosc z kolejki SQS
+				
 
-
+// TEST 
+				/*var handlerToDelete = data.Messages[0].ReceiptHandle;
+				var messageinfo = JSON.parse(data.Messages[0].Body);
+				console.log("Otrzymano wiadomosc: bucket - "+messageinfo.bucket+", key - "+messageinfo.key);
+				*/
+// END TEST
 
 				var data = data.Body.split(":");
 
+				console.log("Otrzymano wiadomosc: bucket - "+data[0]+", key - "+data[1]);
+				
+				
 				var params = {
- 					Bucket: data[0], /* required */
-  					Key: data[1]/* required */
+ 					Bucket: 'milak/wait', /* required */
+  					Key: data[0].substring(14)/* required */
 				};
-
+				//
 				var s3 = new AWS.S3(); 
+				
+				var file = require('fs').createWriteStream('tmp/'+data[0].substring(14));
+			var requestt = s3.getObject(params).createReadStream().pipe(file);
+			console.log('jestem tu po zapisaniu pliku na dysk');
+//
+				
 
 				s3.getObject(params, function(err, data) 
 				{
