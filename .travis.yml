@@ -2,3 +2,13 @@ language: node_js
 node_js:
 - '0.10'
 before_install: npm install -g mocha
+deploy:
+  provider: s3
+  access_key_id: AKIAJFTNH5I4DGCUB7TA
+  secret_access_key:
+    secure: F3w4SjqN2u10aIZHFk1Xs+PqihSIDO8PpKXhbN3+ukiaNBaeVFZ7OH9P2+QbiVMlC0cU8RpnLZf/6bvKQ2wT4XcnWUQv2HQObrOAR6SOUIHIr92jDQpD1BbPAV7/GNxZOL69t+FPl3m6rdMcYe7+rvEZ98rgr+Lo8BAX22NpmkhNXwnuqzatl5ITTWZiFDXPFVodSr71tj509FcCG9pHnRZcHByQg86W19f5VfmDe00R6tpGedE/OALo8hdL07tfw5G4G8Dy9HiWuGRs17e6coEnxDyKHtHi6QQIRFvuut49MhK35oaZNJL97fyYJiSbgbdeGReHeZmkBowQ5okoHtyHUIYSHOWWVV7X1nDFnzEUYoLuT2IdH+WrTIIntyx/noehWQRUKwnL0V9kf/iL0zA9WXYAWaJGcbL5ek7SYH+SgjMVof1R360ypea7WggIthebUOD3Qqz08vYQmHRNfzq76YCDpHS3iIY9JEkRMg7Hp8r2CBADaWuOHAEAPAN0EJkcagUuPYDULl3Ssna/97SHWLyydwdjFZl3Z31Kz1cInXmE4cxLaoN9q0W8szl6VNTRFiP+BmtcO/fBNKr+AjRSzX4boteSdtxfQfn4OHZj5D4eSzENZbCWct3eOsDO2y0fbHMpUu4/QamNlduPXjFt4bicsQNmpwogri4kxek=
+  bucket: milak
+  upload-dir: appWorker
+  acl: public_read
+  on:
+    repo: mmilak197/WebPSOIR
